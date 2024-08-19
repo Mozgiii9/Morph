@@ -123,8 +123,10 @@ while true; do
               CHECK_INTERVAL=${CHECK_INTERVAL:-600}  # Значение по умолчанию 600 секунд
               
               echo "Устанавливаем Python зависимости..."
-              sudo apt install python3-pip -y
-              pip3 install requests python-telegram-bot
+              sudo apt install python3 -y
+              sudo apt install pip -y
+              apt install python3-python-telegram-bot
+              apt install python3-requests
               echo "Создаем и запускаем скрипт мониторинга..."
               cat <<EOF > ~/.morph/node_monitor.py
 import requests
