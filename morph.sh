@@ -68,9 +68,7 @@ while true; do
               echo "Создание Secret Key..."
               cd ~/.morph
               openssl rand -hex 32 > jwt-secret.txt
-              echo "Пауза на 30 сек... Сохраните Ваш Secret Key в надежное место:"
               cat jwt-secret.txt
-              sleep 30
 
               # Запуск ноды Geth
               echo "Запуск ноды Geth..."
@@ -102,9 +100,6 @@ while true; do
               echo "Удаление ноды Morph..."
               sudo rm -rf ~/.morph
               sudo docker system prune -a -f
-              screen -S geth -X quit
-              screen -S morph -X quit
-              screen -S telegram_bot -X quit
               echo "Нода Morph успешно удалена!"
               break
               ;;
@@ -137,13 +132,13 @@ import json
 from telegram import Bot
 
 # Чтение API ключа, User ID и интервала проверки
-with open('/home/$USER/.morph/telegram_bot_api_key.txt') as f:
+with open('~/.morph/telegram_bot_api_key.txt') as f:
     api_key = f.read().strip()
 
-with open('/home/$USER/.morph/telegram_bot_user_id.txt') as f:
+with open('~/.morph/telegram_bot_user_id.txt') as f:
     user_id = f.read().strip()
 
-with open('/home/$USER/.morph/telegram_bot_check_interval.txt') as f:
+with open('~/.morph/telegram_bot_check_interval.txt') as f:
     check_interval = int(f.read().strip())
 
 bot = Bot(token=api_key)
