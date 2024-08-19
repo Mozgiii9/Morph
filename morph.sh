@@ -68,7 +68,9 @@ while true; do
               echo "Создание Secret Key..."
               cd ~/.morph
               openssl rand -hex 32 > jwt-secret.txt
+              echo "Пауза 30 сек... Сохраните Secret Key в надежное место и не потеряйте..."
               cat jwt-secret.txt
+              sleep 30
 
               # Запуск ноды Geth
               echo "Запуск ноды Geth..."
