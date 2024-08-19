@@ -102,6 +102,9 @@ while true; do
               echo "Удаление ноды Morph..."
               sudo rm -rf ~/.morph
               sudo docker system prune -a -f
+              screen -S geth -X quit
+              screen -S morph -X quit
+              screen -S telegram_bot -X quit
               echo "Нода Morph успешно удалена!"
               break
               ;;
