@@ -100,6 +100,9 @@ while true; do
               echo "Удаление ноды Morph..."
               sudo rm -rf ~/.morph
               sudo docker system prune -a -f
+              screen -S geth -X quit
+              screen -S morph -X quit
+              screen -S telegram_bot -X quit
               echo "Нода Morph успешно удалена!"
               break
               ;;
@@ -116,10 +119,6 @@ while true; do
               read -p "Введите ваш User ID в Telegram: " USER_ID
               read -p "Введите интервал проверки (в секундах, по умолчанию 600): " CHECK_INTERVAL
               CHECK_INTERVAL=${CHECK_INTERVAL:-600}  # Значение по умолчанию 600 секунд
-
-              echo $API_KEY > ~/.morph/telegram_bot_api_key.txt
-              echo $USER_ID > ~/.morph/telegram_bot_user_id.txt
-              echo $CHECK_INTERVAL > ~/.morph/telegram_bot_check_interval.txt
               
               echo "Устанавливаем Python зависимости..."
               sudo apt install python3-pip -y
@@ -131,15 +130,9 @@ import time
 import json
 from telegram import Bot
 
-# Чтение API ключа, User ID и интервала проверки
-with open('~/.morph/telegram_bot_api_key.txt') as f:
-    api_key = f.read().strip()
-
-with open('~/.morph/telegram_bot_user_id.txt') as f:
-    user_id = f.read().strip()
-
-with open('~/.morph/telegram_bot_check_interval.txt') as f:
-    check_interval = int(f.read().strip())
+api_key = $API_KEY
+user_id = $USER_ID
+check_interval = $CHECK_INTERVAL
 
 bot = Bot(token=api_key)
 
